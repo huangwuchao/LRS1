@@ -1,0 +1,69 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+#box{
+    width: 600px;
+    height: 500px;
+    background: #F2F2F2;
+    margin:50px auto;
+    padding:50px;
+    position:relative;
+}
+#box h3{
+    text-align:center;
+    font-size:32px;
+}
+#user,#psw{
+    width: 444px;
+    height: 50px;
+    border:1px solid #E6E6E6;
+    margin-left:23px;
+    padding-left:48px;
+    margin-top:20px;
+}
+#user{
+    background:url(../img/login_user.png) no-repeat 15px 14px;
+    background-color: white;
+}
+#psw{
+    background:url(../img/login_psw.png) no-repeat 15px 14px;
+    background-color: white;
+}
+#check{
+    width: 270px;
+    height: 50px;
+    margin-top:20px;
+    border:1px solid #E6E6E6;
+    margin-left:23px;
+    padding-left:48px;
+    background:url(../img/login_check.png) no-repeat 13px 12px;
+    background-color: white;
+}
+.s2{
+    display: inline-block;
+    position: absolute;
+    right:84px;
+    bottom:198px;
+}
+#loginBtn{
+    width: 444px;
+    height: 50px;
+    margin:20px 0 0 23px;
+    background: #009688;
+    color:white;
+}
+#rem{
+    margin:20px 5px 0 23px;
+}
+.rem,.forg{
+    font-size:16px;
+    color:#666666;
+}
+.forg{
+    margin-left:260px;
+    text-decoration: none;
+}
+.inf1{
+    margin-left:30px;
+    color:red;
+    line-height: 26px;
+    height: 30px;
+}
