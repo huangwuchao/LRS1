@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="../assets/layui-v2.4.5/layui/css/layui.css">
   <script type="text/javascript" src="../assets/layui-v2.4.5/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../assets/jquery-3.2.1.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -158,9 +159,12 @@ layui.use('table', function(){
       }, function(value, index){
         obj.update({
           email: value
+
+
         });
         layer.close(index);
       });
+      
     }
   });
 
