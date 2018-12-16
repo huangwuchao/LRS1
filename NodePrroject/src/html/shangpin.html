@@ -88,7 +88,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑价格</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
               
@@ -102,22 +102,20 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://localhost:3006'
+    ,url:'http://localhost:3108/goodscategory'
     ,toolbar: '#toolbarDemo'
     ,title: '用户数据表'
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
       ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-      ,{field:'username', title:'用户名', width:120, edit: 'text'}
-      ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
-        return '<em>'+ res.email +'</em>'
-      }}
-      ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-      ,{field:'city', title:'城市', width:100}
-      ,{field:'sign', title:'签名'}
-      ,{field:'experience', title:'积分', width:80, sort: true}
-      ,{field:'ip', title:'IP', width:120}
-      ,{field:'logins', title:'登入次数', width:100, sort: true}
+      ,{field:'mane', title:'商品名', width:293, edit: 'text'}
+      ,{field:'url', title:'图片路径', width:150, edit: 'text'}
+      ,{field:'prile', title:'价格', width:80, edit: 'text', sort: true}
+      ,{field:'jieshao', title:'商品介绍', width:277}
+      // ,{field:'sign', title:'签名'}
+      ,{field:'renqi', title:'人气', width:80, sort: true}
+      // ,{field:'ip', title:'IP', width:120}
+      // ,{field:'logins', title:'登入次数', width:100, sort: true}
       ,{field:'joinTime', title:'加入时间', width:120}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
     ]]
@@ -142,7 +140,7 @@ layui.use('table', function(){
       break;
     };
   });
-  
+  let edit_time = new Date().toLocaleDateString();
 //   //监听行工具事件
   table.on('tool(test)', function(obj){
     var data = obj.data;
@@ -151,20 +149,55 @@ layui.use('table', function(){
       layer.confirm('真的删除行么', function(index){
         obj.del();
         layer.close(index);
+
+        //拿到ID，向数据库发送删除请求
+        let idx= obj.data.id;
+        //console.log(idx);
+        $.ajax({
+            type:'get',
+            url:'http://localhost:3108/shangchu',
+            data:{
+                        'id':idx,
+                        
+                    },
+            async:true,
+            success:function(str){
+                        console.log(str);
+                    }
+
+        })
       });
     } else if(obj.event === 'edit'){
       layer.prompt({
         formType: 2
-        ,value: data.email
+        ,value: data.prile
       }, function(value, index){
         obj.update({
-          email: value
+         
 
-
+          prile: value
+          //joinTime: edit_time
         });
         layer.close(index);
+        //console.log(value)
+        
+        $.ajax({
+                    type:'get',
+                    url:'http://localhost:3108/bianji',
+                    async:true,
+                    data:{
+                        'id':obj.data.id,
+                        'name':value,
+                        'time':edit_time
+                    },
+                    success:function(str){
+                        console.log(str);
+                    }
+                });
       });
       
+                // console.log(value,edit_time,obj.data.id);
+                
     }
   });
 
