@@ -90,6 +90,7 @@
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑价格</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="change">下/上架</a>
 </script>
               
           
@@ -109,15 +110,15 @@ layui.use('table', function(){
       {type: 'checkbox', fixed: 'left'}
       ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
       ,{field:'mane', title:'商品名', width:293, edit: 'text'}
-      ,{field:'url', title:'图片路径', width:150, edit: 'text'}
+      // ,{field:'url', title:'图片路径', width:150, edit: 'text'}
       ,{field:'prile', title:'价格', width:80, edit: 'text', sort: true}
       ,{field:'jieshao', title:'商品介绍', width:277}
-      // ,{field:'sign', title:'签名'}
+      ,{field:'zt', title:'状态', width:77}
       ,{field:'renqi', title:'人气', width:80, sort: true}
       // ,{field:'ip', title:'IP', width:120}
       // ,{field:'logins', title:'登入次数', width:100, sort: true}
-      ,{field:'joinTime', title:'加入时间', width:120}
-      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+      ,{field:'joinTime', title:'加入时间', width:117}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:225}
     ]]
     ,id: 'testReload'
     ,page: true
@@ -167,16 +168,18 @@ layui.use('table', function(){
 
         })
       });
+      //点击编辑，获取价格的值传到后端改变数据库
     } else if(obj.event === 'edit'){
       layer.prompt({
         formType: 2
-        ,value: data.prile
+        ,
+        value: data.prile,
+        //joinTime1: edit_time,
+
       }, function(value, index){
         obj.update({
-         
-
-          prile: value
-          //joinTime: edit_time
+          prile: value,
+          //joinTime1: joinTime1
         });
         layer.close(index);
         //console.log(value)
@@ -198,8 +201,41 @@ layui.use('table', function(){
       
                 // console.log(value,edit_time,obj.data.id);
                 
-    }
-  });
+    }else if(obj.event === 'change'){
+                let change = $(this).parent().parent().prev().prev().prev().children().html();
+                if(change=='未上架'){
+                    $(this).parent().parent().prev().prev().prev().children().html('上架');
+                    $.ajax({
+                        type:'get',
+                        url:'http://localhost:3108/_change',
+                        async:true,
+                        data:{
+                            'id':obj.data.id,
+                            'stage':'上架'
+                        },
+                        success:function(str){
+                            // console.log(str);
+                        }
+                    });
+                }else{
+                    $(this).parent().parent().prev().prev().prev().children().html('未上架');
+                    $.ajax({
+                        type:'get',
+                        url:'http://localhost:3108/_change',
+                        async:true,
+                        data:{
+                            'id':obj.data.id,
+                            'stage':'未上架'
+                        },
+                        success:function(str){
+                            // console.log(str);
+                        }
+                    });
+                }
+              }
+            });
+  
+  
 
  var $ = layui.$, active = {
     reload: function(){
