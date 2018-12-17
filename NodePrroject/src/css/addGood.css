@@ -1,0 +1,23 @@
+.one{
+    margin-top: 20px;
+}
+#two{
+    width: 500px;
+    display: inline-block;
+    float: left;
+    margin: 0 20px 20px 0px;
+}
+#three{
+    display: inline-block;
+}
+#four{
+    width: 500px;
+}
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
+    margin: 0 10px 10px 0;
+}
+#five{
+    margin-left: 30px;
+}
