@@ -94,7 +94,7 @@ app.use(express.static('./'));
 
 // })
 
-//商品列表
+// //商品列表
 // app.get('/goodslist',function(req,res){
 //     MongoClient.connect('mongodb://localhost:27017',function(err,database){
 //         if(err) throw err;
