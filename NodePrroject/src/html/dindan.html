@@ -39,20 +39,22 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed">
+        <li class="layui-nav-item ">
           <a class="" href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
             <dd><a href="shangpin.html">商品列表</a></dd>
             <dd><a href="fenlei.html">商品分类</a></dd>
+            <dd><a href="addGood.html">添加商品</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="yonhu.html">用户列表</a></dd>
+            <dd><a href="addUser.html">添加用户</a></dd>
           </dl>
         </li>
-       <li class="layui-nav-item">
+       <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">订单管理</a>
           <dl class="layui-nav-child">
             <dd><a href="dindan.html">订单列表</a></dd>
@@ -94,23 +96,23 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://localhost:3006'
+    ,url:'http://localhost:3108/dindan'
     ,toolbar: '#toolbarDemo'
     ,title: '用户数据表'
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
       ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-      ,{field:'username', title:'用户名', width:120, edit: 'text'}
-      ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
-        return '<em>'+ res.email +'</em>'
-      }}
-      ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-      ,{field:'city', title:'城市', width:100}
-      ,{field:'sign', title:'签名'}
-      ,{field:'experience', title:'积分', width:80, sort: true}
-      ,{field:'ip', title:'IP', width:120}
-      ,{field:'logins', title:'登入次数', width:100, sort: true}
-      ,{field:'joinTime', title:'加入时间', width:120}
+      ,{field:'yunfei', title:'运费', width:120, edit: 'text'}
+      // ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
+      //   return '<em>'+ res.email +'</em>'
+      // }}
+      ,{field:'prile', title:'价格', width:80, edit: 'text', sort: true}
+      ,{field:'shuliang', title:'数量', width:100}
+      ,{field:'mane', title:'商品名称',width:318}
+      ,{field:'shangzhon', title:'商品总额', width:111, sort: true}
+      // ,{field:'ip', title:'IP', width:120}
+      ,{field:'quanzhon', title:'订单总额', width:146, sort: true}
+      ,{field:'joinTime', title:'下单时间', width:120}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
     ]]
     ,page: true

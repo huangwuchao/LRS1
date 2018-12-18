@@ -40,114 +40,170 @@ app.use(express.static('./'));
 //路由
 // let urlencodedParser = bodyParser.urlencoded({ extended: false })
 // 商品分类
-// app.get('/goodscategory',function(req,res){
-//     MongoClient.connect('mongodb://localhost:27017',function(err,database){
-//         if(err) throw err;
-//         let db = database.db('h1809');
-//         let user = db.collection('xiangmu');
-//         let count = 0;
+app.get('/shangpinfenlei',function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('shangpin');
+        let count = 0;
 
-//         let page = req.query.page;
-//         let limit = req.query.limit;
-//         user.find().toArray(function(err2,result2){
-//             sum = result2.length;
-//             return sum;
-//         });
-//         // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
-//         //     res.send({
-//         //         code:0,
-//         //         data:result,
-//         //         msg:'商品列表',
-//         //         count:sum
-//         //     });
-//         // });
+        let page = req.query.page;
+        let limit = req.query.limit;
+        user.find().toArray(function(err2,result2){
+            sum = result2.length;
+            return sum;
+        });
+        // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
+        //     res.send({
+        //         code:0,
+        //         data:result,
+        //         msg:'商品列表',
+        //         count:sum
+        //     });
+        // });
 
-//         user.find().sort({"id":1}).skip((page-1)*limit*1).limit(limit*1).toArray((err,result)=>{
-//             // console.log(result);
-//             let data;
-//             if(err){
-//                 // console.log(666);
-//                 data={
-//                     'code':1,
-//                     'data':[],
-//                     'msg':'没有商品',
-//                     'count':pages
-//                 }
-//             }else{
-//                 data = {
-//                     'code':0,
-//                     'data':result,
-//                     'msg':'商品列表',
-//                     'count':sum
-//                 }
+        user.find().sort({"id":1}).skip((page-1)*limit*1).limit(limit*1).toArray((err,result)=>{
+            // console.log(result);
+            let data;
+            if(err){
+                // console.log(666);
+                data={
+                    'code':1,
+                    'data':[],
+                    'msg':'没有商品',
+                    'count':pages
+                }
+            }else{
+                data = {
+                    'code':0,
+                    'data':result,
+                    'msg':'商品列表',
+                    'count':sum
+                }
                 
-//             }
+            }
 
-//             res.send(data);
-//         });
+            res.send(data);
+        });
         
         
 
 
-//         database.close();
-//     })
+        database.close();
+    })
 
-// })
+})
+//用户信息表
+app.get('/yonhubiao',function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('yonhubiao');
+        let count = 0;
 
-// //商品列表
-// app.get('/goodslist',function(req,res){
-//     MongoClient.connect('mongodb://localhost:27017',function(err,database){
-//         if(err) throw err;
-//         let db = database.db('win');
-//         let user = db.collection('goodslist');
-//         let count = 0;
+        let page = req.query.page;
+        let limit = req.query.limit;
+        user.find().toArray(function(err2,result2){
+            sum = result2.length;
+            return sum;
+        });
+        // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
+        //     res.send({
+        //         code:0,
+        //         data:result,
+        //         msg:'商品列表',
+        //         count:sum
+        //     });
+        // });
 
-//         let page = req.query.page;
-//         let limit = req.query.limit;
-//         user.find().toArray(function(err2,result2){
-//             sum = result2.length;
-//             return sum;
-//         });
-//         // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
-//         //     res.send({
-//         //         code:0,
-//         //         data:result,
-//         //         msg:'商品列表',
-//         //         count:sum
-//         //     });
-//         // });
-
-//         user.find().skip((page-1)*limit*1).limit(limit*1).toArray((err,result)=>{
-//             // console.log(result);
-//             let data;
-//             if(err){
-//                 // console.log(666);
-//                 data={
-//                     'code':1,
-//                     'data':[],
-//                     'msg':'没有商品',
-//                     'count':pages
-//                 }
-//             }else{
-//                 data = {
-//                     'code':0,
-//                     'data':result,
-//                     'msg':'商品列表',
-//                     'count':sum
-//                 }
+        user.find().sort({"id":1}).skip((page-1)*limit*1).limit(limit*1).toArray((err,result)=>{
+            // console.log(result);
+            let data;
+            if(err){
+                // console.log(666);
+                data={
+                    'code':1,
+                    'data':[],
+                    'msg':'没有商品',
+                    'count':pages
+                }
+            }else{
+                data = {
+                    'code':0,
+                    'data':result,
+                    'msg':'商品列表',
+                    'count':sum
+                }
                 
-//             }
+            }
 
-//             res.send(data);
-//         });
+            res.send(data);
+        });
         
         
 
 
-//         database.close();
-//     })
+        database.close();
+    })
 
-// })
+})
+
+//订单信息表
+app.get('/dindan',function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('dindan');
+        let count = 0;
+
+        let page = req.query.page;
+        let limit = req.query.limit;
+        user.find().toArray(function(err2,result2){
+            sum = result2.length;
+            return sum;
+        });
+        // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
+        //     res.send({
+        //         code:0,
+        //         data:result,
+        //         msg:'商品列表',
+        //         count:sum
+        //     });
+        // });
+
+        user.find().sort({"id":1}).skip((page-1)*limit*1).limit(limit*1).toArray((err,result)=>{
+            // console.log(result);
+            let data;
+            if(err){
+                // console.log(666);
+                data={
+                    'code':1,
+                    'data':[],
+                    'msg':'没有商品',
+                    'count':pages
+                }
+            }else{
+                data = {
+                    'code':0,
+                    'data':result,
+                    'msg':'商品列表',
+                    'count':sum
+                }
+                
+            }
+
+            res.send(data);
+        });
+        
+        
+
+
+        database.close();
+    })
+
+})
+
+
 //点击删除，根据ID删除数据库数据
 app.get('/shangchu',function(req,res){
     let idx = req.query.id*1;
@@ -200,7 +256,7 @@ app.get('/_change',function(req,res){
         });
     });
 });
-//
+//商品列表和商品ID搜索
 
 app.get('/goodscategory',function(req,res){
     MongoClient.connect('mongodb://localhost:27017',function(err,database){

@@ -39,17 +39,20 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed">
+        <li class="layui-nav-item ">
           <a class="" href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
             <dd><a href="shangpin.html">商品列表</a></dd>
             <dd><a href="fenlei.html">商品分类</a></dd>
+            <dd><a href="addGood.html">添加商品</a></dd>
+
           </dl>
         </li>
-        <li class="layui-nav-item">
+        <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">用户列表</a></dd>
+             <dd><a href="addUser.html">添加用户</a></dd>
           </dl>
         </li>
        <li class="layui-nav-item">
@@ -77,7 +80,7 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://localhost:3006'
+    ,url:'http://localhost:3108/yonhubiao'
     ,cols: [[
       {field:'id', width:80, title: 'ID', sort: true}
       ,{field:'username', width:80, title: '用户名'}
@@ -85,7 +88,7 @@ layui.use('table', function(){
       ,{field:'city', width:80, title: '城市'}
       ,{field:'sign', title: '签名', minWidth: 150}
       ,{field:'experience', width:80, title: '积分', sort: true}
-      ,{field:'score', width:80, title: '评分', sort: true}
+      // ,{field:'score', width:80, title: '评分', sort: true}
       ,{field:'classify', width:80, title: '职业'}
       ,{field:'wealth', width:135, title: '财富', sort: true}
     ]]
