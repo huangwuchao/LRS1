@@ -206,6 +206,7 @@ app.get('/dindan',function(req,res){
 
 //点击删除，根据ID删除数据库数据
 app.get('/shangchu',function(req,res){
+    console.log(req.query);
     let idx = req.query.id*1;
     console.log(idx);
     MongoClient.connect('mongodb://localhost:27017',function(err,database){
@@ -218,7 +219,19 @@ app.get('/shangchu',function(req,res){
 
     });
 });
+//添加商品
+app.get('/spTianjia',function(req,res){
+    console.log(req);
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('xiangmu');
+        user.insert(req.body,(err2,result2)=>{
+            console.log(result2);
+        })
 
+    });
+});
 
 
 //点击编辑，根据传过来的值改变数据库的值

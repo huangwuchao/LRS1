@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加商品</title>
+    <link rel="stylesheet" href="../assets/layui-v2.4.5/layui/css/layui.css">
+    <style type="text/css">
+        .layui-nav-item>.frist_accordion{
+            font-size: 16px;
+        }
+        .layui-header>.head_show{
+            line-height: 60px;
+            font-size: 12px;
+            position: absolute;
+            left: 220px;
+            top: 0;
+        }
+        .layui-header>.head_show>a{
+            padding: 0 4px;
+            color: #fff;
+        }
+        .layui-header .head_show .dark{
+            color: #888;
+        }
+        .layui-header>.head_show>span{
+            color: #fff;
+        }
+        .layui-header>.head_show>a:hover{
+            color: rgb(0, 150, 136);
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">Super 后台</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <!-- <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item">
+                    <a href="">控制台</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">商品管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">用户</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">邮件管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">消息管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">授权管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul> -->
+            
+            <!-- 面包屑 -->
+            <div class="head_show">
+                <a class="dark" href="backstage.html">首页</a>
+                <span>/</span>
+                <a href="addgoods.html">添加商品</a>
+                <span>/</span>
+            </div>
+            <ul class="layui-nav layui-layout-right">
+            <!-- 头像+退出按钮 -->
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">Siri
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">基本资料</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">安全设置</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="log_out" href="javascript:;">退出</a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                    <!-- 第一块 -->
+                        <a class="frist_accordion" href="javascript:;">商品管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="goodscategory" href="goodscategory.html">商品分类</a>
+                            </dd>
+                            <dd>
+                                <a class="goodslist" href="goodslist.html">商品列表</a>
+                            </dd>
+                            <dd class="layui-this">
+                                <a href="addgoods.html">添加商品</a>
+                            </dd>
+                            <dd>
+                                <a href="addcategory.html">添加分类</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                    <!-- 第二块 -->
+                        <a class="frist_accordion" href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="userlist" href="userlist.html">用户列表</a>
+                            </dd>
+                            <dd>
+                                <a href="addusers.html">添加用户</a>
+                            </dd>
+                            <!-- <dd>
+                                <a href="">超链接</a>
+                            </dd> -->
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="frist_accordion" href="javascript:;">订单管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="orderlist" href="orderlist.html">订单列表</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <!-- <li class="layui-nav-item">
+                        <a href="">发布商品</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+        <!-- 内容主体区域 -->
+            <div style="padding: 20px;">
+            <!-- 内容主体区域 -->
+                
+                <!-- 商品名称 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品名称：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入商品名称" class="layui-input add_name">
+                    </div>
+                </div>
+                
+                <!-- 分类 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品分类：</label>
+                    <div class="layui-input-inline">
+                        <select name="modules" lay-verify="required" lay-search="" style="height:36px;width:300px;padding-left:10px;border-radius:2px;border-color:#e6e6e6" class="add_categroy">
+                            <!-- <option value="">选择商品分类</option>
+                            <option value="1">苹果</option>
+                            <option value="2">梨</option>
+                            <option value="3">桃</option>
+                            <option value="4">橘</option>
+                            <option value="5">橙</option>
+                            <option value="6">柚</option>
+                            <option value="7">葡萄</option>
+                            <option value="8">香蕉</option>
+                            <option value="9">柿子</option>
+                            <option value="10">百香果</option>
+                            <option value="11">柠檬</option>
+                            <option value="12">荔枝</option>
+                            <option value="13">芒果</option>
+                            <option value="14">番石榴</option>
+                            <option value="15">番荔枝</option> -->
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 原价和现价 -->
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">原价：</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input add_oldprice">
+                        </div>
+                        <div class="layui-form-mid">现价：</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input add_newprice">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 库存 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">库存：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入库存数量" autocomplete="off" class="layui-input add_number">
+                    </div>
+                </div>
+                
+                <!-- 状态 -->
+                <div class="layui-form-item" pane="">
+                    <label class="layui-form-label">状态：</label>
+                    <div class="layui-unselect layui-form-switch layui-form-onswitch btn1" lay-skin="_switch">
+                        <em>已上架</em>
+                        <i></i>
+                    </div>
+                </div>
+                
+                <!-- 图片上传 -->
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-warm" id="test2">多图片上传</button> 
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：（注：第一张为封面）
+                        <div class="layui-upload-list" id="demo2">
+                        </div>
+                    </blockquote>
+                </div>
+                
+                <!-- 说明 -->
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">商品说明：</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea add_explain"></textarea>
+                    </div>
+                </div>
+
+                <!-- 提交 -->
+                <div style="width: 216px; margin: 0 auto;">
+                <!-- layui 2.2.5 新增 -->
+                    <button class="layui-btn layui-btn-fluid add_btn">添加</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layui-footer">
+        <!-- 底部固定区域 -->
+            <div class="foot_time"></div>
+        </div>
+    </div>
+    
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="../assets/jquery-3.2.1.js"></script>
+
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function(){
+            var element = layui.element;
+
+            var foot_time1 =  new Date().toLocaleDateString();//年月日
+            var foot_time2 =  new Date().toLocaleTimeString();//时分秒
+            $('.foot_time').html('日期：'+foot_time1+'&nbsp&nbsp&nbsp&nbsp'+foot_time2);//显示时间
+            clearInterval(timer1);
+            var timer1 = setInterval(function(){
+                foot_time1 =  new Date().toLocaleDateString();//获取时间
+                foot_time2 =  new Date().toLocaleTimeString();//获取时间
+                $('.foot_time').html('日期：'+foot_time1+'&nbsp&nbsp&nbsp&nbsp'+foot_time2);//显示时间
+            },1000);
+
+            $('.log_out').click(function(){
+            //点击退出按钮
+            });
+        });
+
+        //上/下架按钮
+        var btn1_num=0;
+        $('.btn1').click(function(){
+            btn1_num++;
+            if(btn1_num%2 == 0){
+                $('.btn1').addClass('layui-form-onswitch');
+                $('.btn1').find('em').html('已上架');
+            }else{
+                $('.btn1').removeClass('layui-form-onswitch');
+                $('.btn1').find('em').html('未上架');
+            }
+        })
+    </script>
+
+    <script>
+        layui.use('upload', function(){
+            var $ = layui.jquery
+            ,upload = layui.upload;
+
+            //多图片上传
+            upload.render({
+                elem: '#test2'
+                ,url: 'http://localhost:3008/addpic'
+                ,multiple: true
+                ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img add_img" style="width:92px;height:92px;margin:0 10px 10px 0">')
+                    });
+                }
+                ,done: function(res){
+                    
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        // 渲染分类
+        $.ajax({
+            type:"get",
+            url:"http://localhost:3008/cate",
+            async:"true",
+            data:{
+            },
+            success:function(str){
+                var res = str.map(function(item){
+                    return `<option>${item}</option>`
+                }).join('');
+                res='<option>选择商品分类</option>'+res;
+                $('.add_categroy').html(res);
+            }
+        });
+
+        //提交
+        var addpict=[];
+        $('.add_btn').click(function(){
+            var add_name = $('.add_name').val();//商品名称
+            var add_categroy = $('.add_categroy option:selected').html();//商品分类
+            var add_oldprice = $('.add_oldprice').val();//原价
+            var add_newprice = $('.add_newprice').val();//现价
+            var add_stage = $('.btn1').find('em').html();//状态
+            var add_explain = $('.add_explain').val();//商品说明
+            var add_time = new Date().toLocaleDateString().split('/');
+            var add_time = add_time[0]+'-'+add_time[1]+'-'+add_time[2]//添加时间
+            var add_img = $('.add_img');
+            for(var j=0;j<add_img.length;j++){
+                var Arr=$('#demo2').find('img').eq(j).attr('alt')
+                addpict.push(Arr);
+            }
+            // console.log(addpict);添加图片
+            var add_number = $('.add_number').val();//库存
+
+            if(add_name&&add_categroy&&add_oldprice&&add_newprice&&add_number&&addpict&&add_explain){
+                if(add_categroy!='选择商品分类'&&add_oldprice>=add_newprice){
+                    $.ajax({
+                        type:"post",
+                        url:"http://localhost:3008/addgoods",
+                        async:"true",
+                        data:{
+                            'name':add_name,
+                            'categroy':add_categroy,
+                            'oldprice':add_oldprice,
+                            'newprice':add_newprice,
+                            'number':add_number,
+                            'stage':add_stage,
+                            'picture':addpict,
+                            'explain':add_explain,
+                            'time':add_time
+                        },
+                        success:function(str){
+                    
+                        }
+                    });
+                }else{
+                    alert('请输入正确的信息');
+                }
+            }else{
+                alert('请将信息补充完整');
+            }
+            
+            // console.log(add_name);
+            // console.log(add_categroy);
+            // console.log(add_oldprice);
+            // console.log(add_newprice);
+            // console.log(add_number);
+            // console.log(add_stage);
+            // console.log(addpict);
+            // console.log(add_explain);
+            // console.log(add_time);
+
+           //渲染分类
+app.get('/cate',function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        let db = database.db('win');
+        let user = db.collection('goodscategory');
+        user.find().toArray(function(err,result){
+            var all_cate=[];
+            for(var i=0;i<result.length;i++){
+                all_cate.push(result[i].name);
+            }
+            res.send(all_cate);
+        });
+    });
+})
+
+// 上传图片
+app.post('/addpic',function(req,res){
+})
+
+//添加商品
+let urlencodedParser = bodyParser.urlencoded({ extended: false })//中间件，用于解析POST请求传来的数据
+app.post('/addgoods',urlencodedParser,function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        // console.log(req.body);
+        let db = database.db('win');
+        let user = db.collection('goodslist');
+        user.find({}).sort({id:-1}).limit(1).toArray((err,result)=>{
+            var add_id=result[0].id;
+            Object.assign(req.body,{id:add_id});//将id对象添加到req.body对象中
+            user.insert(req.body,(err2,result2)=>{
+                console.log(result2);
+            })
+        })
+    });
+}) 
+
+
+        })
+    </script>
+</body>
+</html>
