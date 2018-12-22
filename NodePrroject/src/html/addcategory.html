@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加分类</title>
+    <link rel="stylesheet" href="../resources/layui/css/layui.css">
+    <style type="text/css">
+        .layui-nav-item>.frist_accordion {
+            font-size: 16px;
+        }
+
+        .layui-header>.head_show {
+            line-height: 60px;
+            font-size: 12px;
+            position: absolute;
+            left: 220px;
+            top: 0;
+        }
+
+        .layui-header>.head_show>a {
+            padding: 0 4px;
+            color: #fff;
+        }
+
+        .layui-header .head_show .dark {
+            color: #888;
+        }
+
+        .layui-header>.head_show>span {
+            color: #fff;
+        }
+
+        .layui-header>.head_show>a:hover {
+            color: rgb(0, 150, 136);
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">Super 后台</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <!-- <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item">
+                    <a href="">控制台</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">商品管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">用户</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">邮件管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">消息管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">授权管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul> -->
+
+            <!-- 面包屑 -->
+            <div class="head_show">
+                <a class="dark" href="backstage.html">首页</a>
+                <span>/</span>
+                <a href="addcategory.html">添加分类</a>
+                <span>/</span>
+            </div>
+            <ul class="layui-nav layui-layout-right">
+                <!-- 头像+退出按钮 -->
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">Siri
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">基本资料</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">安全设置</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="log_out" href="javascript:;">退出</a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <!-- 第一块 -->
+                        <a class="frist_accordion" href="javascript:;">商品管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="goodscategory" href="goodscategory.html">商品分类</a>
+                            </dd>
+                            <dd>
+                                <a class="goodslist" href="goodslist.html">商品列表</a>
+                            </dd>
+                            <dd>
+                                <a href="addgoods.html">添加商品</a>
+                            </dd>
+                            <dd class="layui-this">
+                                <a href="addcategory.html">添加分类</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <!-- 第二块 -->
+                        <a class="frist_accordion" href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="userlist" href="userlist.html">用户列表</a>
+                            </dd>
+                            <dd>
+                                <a href="addusers.html">添加用户</a>
+                            </dd>
+                            <!-- <dd>
+                                <a href="">超链接</a>
+                            </dd> -->
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="frist_accordion" href="javascript:;">订单管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a class="orderlist" href="orderlist.html">订单列表</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <!-- <li class="layui-nav-item">
+                        <a href="">发布商品</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 20px;">
+                <!-- 内容主体区域 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分类名称：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入分类" class="layui-input addcate_name">
+                    </div>
+                </div>
+                <div class="content" style="padding-left:25px;margin-bottom: 10px">温馨提示：无</div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">备注：</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea addcate_content"></textarea>
+                    </div>
+                </div>
+                <div style="width: 216px; margin: 0 auto;">
+                    <!-- layui 2.2.5 新增 -->
+                    <button class="layui-btn layui-btn-fluid addcate_btn">添 加</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <div class="foot_time"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../resources/layui/layui.js"></script>
+
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function () {
+            var element = layui.element;
+
+            var foot_time1 = new Date().toLocaleDateString(); //年月日
+            var foot_time2 = new Date().toLocaleTimeString(); //时分秒
+            $('.foot_time').html('日期：' + foot_time1 + '&nbsp&nbsp&nbsp&nbsp' + foot_time2); //显示时间
+            clearInterval(timer1);
+            var timer1 = setInterval(function () {
+                foot_time1 = new Date().toLocaleDateString(); //获取时间
+                foot_time2 = new Date().toLocaleTimeString(); //获取时间
+                $('.foot_time').html('日期：' + foot_time1 + '&nbsp&nbsp&nbsp&nbsp' + foot_time2); //显示时间
+            }, 1000);
+
+            $('.log_out').click(function () {
+                //点击退出按钮
+            });
+        });
+
+        //点击添加按钮
+        $('.addcate_name').blur(function () {
+            var addcate_name = $('.addcate_name').val();
+            addcate_name =addcate_name.trim();
+            // console.log(addcate_name);
+            if(addcate_name){
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:3008/addcate_name",
+                    async:"true",
+                    data:{
+                        "name":addcate_name
+                    },
+                    success:function(str){
+                        if(str){
+                            if(str == 1){
+                                //已经存在的分类
+                                $('.content').html('温馨提示：该分类已存在')
+                                $('.content').css('color','#f00');
+                            }else{
+                                $('.content').html('温馨提示：该分类可以添加')
+                                $('.content').css('color','#0f0');
+                                $('.addcate_btn').click(function(){
+                                    // console.log(addcate_name);
+                                    var add_time = new Date().toLocaleDateString().split('/');
+                                    var add_time = add_time[0]+'/'+add_time[1]+'/'+add_time[2]//添加时间
+                                    $.ajax({
+                                        type:"get",
+                                        url:"http://localhost:3008/addcate",
+                                        async:"true",
+                                        data:{
+                                            "name":addcate_name,
+                                            "time":add_time
+                                        },
+                                        success:function(str){
+                                            if(str){
+                                                location.href='goodscategory.html';
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }
+                })
+            }else{
+                $('.content').html('温馨提示：请输入分类名称')
+                $('.content').css('color','#f00');
+            }
+        });
+    </script>
+</body>
+
+</html>

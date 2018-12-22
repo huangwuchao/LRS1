@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>添加商品</title>
     <link rel="stylesheet" href="../assets/layui-v2.4.5/layui/css/layui.css">
+    <script src="../assets/jquery-3.2.1.js"></script>
+    <script src="../assets/layui-v2.4.5/layui/layui.js"></script>
     <style type="text/css">
         .layui-nav-item>.frist_accordion{
             font-size: 16px;
@@ -244,7 +246,7 @@
     </div>
     
     <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
-    <script type="text/javascript" src="../assets/jquery-3.2.1.js"></script>
+    
 
     <script>
         //JavaScript代码区域
@@ -392,26 +394,7 @@ app.get('/cate',function(req,res){
     });
 })
 
-// 上传图片
-app.post('/addpic',function(req,res){
-})
 
-//添加商品
-let urlencodedParser = bodyParser.urlencoded({ extended: false })//中间件，用于解析POST请求传来的数据
-app.post('/addgoods',urlencodedParser,function(req,res){
-    MongoClient.connect('mongodb://localhost:27017',function(err,database){
-        // console.log(req.body);
-        let db = database.db('win');
-        let user = db.collection('goodslist');
-        user.find({}).sort({id:-1}).limit(1).toArray((err,result)=>{
-            var add_id=result[0].id;
-            Object.assign(req.body,{id:add_id});//将id对象添加到req.body对象中
-            user.insert(req.body,(err2,result2)=>{
-                console.log(result2);
-            })
-        })
-    });
-}) 
 
 
         })

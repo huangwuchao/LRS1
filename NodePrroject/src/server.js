@@ -220,19 +220,40 @@ app.get('/shangchu',function(req,res){
     });
 });
 //添加商品
-app.get('/spTianjia',function(req,res){
-    console.log(req);
-    MongoClient.connect('mongodb://localhost:27017',function(err,database){
-        if(err) throw err;
-        let db = database.db('h1809');
-        let user = db.collection('xiangmu');
-        user.insert(req.body,(err2,result2)=>{
-            console.log(result2);
-        })
-
-    });
+let urlencodedParser = bodyParser.urlencoded({ extended: false })//中间件，用于解析POST请求传来的数据
+app.post('/spTianjia',urlencodedParser,function(req,res){
+        MongoClient.connect('mongodb://localhost:27017',function(err,database){
+            // console.log(req.body);
+            let db = database.db('h1809');
+            let user = db.collection('xiangmu');
+            user.find({}).sort({id:-1}).limit(1).toArray((err,result)=>{
+                var add_id=result[0].id;
+                add_id++;
+                Object.assign(req.body,{id:add_id});//将id对象添加到req.body对象中
+                user.insert(req.body,(err2,result2)=>{
+                    res.send(result2);
+                })
+            })
+        });
+    
 });
-
+//渲染分类
+app.get('/cate',function(req,res){
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        let db = database.db('h1809');
+        let user = db.collection('shangpin');
+        user.find().toArray(function(err,result){
+            var all_cate=[];
+            for(var i=0;i<result.length;i++){
+                all_cate.push(result[i].name);
+            }
+            res.send(all_cate);
+        });
+    });
+})
+// 上传图片
+app.post('/addpic',urlencodedParser,function(req,res){
+})
 
 //点击编辑，根据传过来的值改变数据库的值
 app.get('/bianji',function(req,res){
@@ -286,6 +307,7 @@ app.get('/goodscategory',function(req,res){
             sum = result2.length;
             return sum;
         });
+        //console.log(sum);
         // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
         //     res.send({
         //         code:0,
