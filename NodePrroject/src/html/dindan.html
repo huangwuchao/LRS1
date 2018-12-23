@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="../assets/layui-v2.4.5/layui/css/layui.css">
   <script type="text/javascript" src="../assets/layui-v2.4.5/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../assets/jquery-3.2.1.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -82,7 +83,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑商品名</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
               
@@ -135,7 +136,7 @@ layui.use('table', function(){
       break;
     };
   });
-  
+  let edit_time = new Date().toLocaleDateString();
   //监听行工具事件
   table.on('tool(test)', function(obj){
     var data = obj.data;
@@ -144,16 +145,44 @@ layui.use('table', function(){
       layer.confirm('真的删除行么', function(index){
         obj.del();
         layer.close(index);
+        let idx= obj.data.id;
+        //console.log(idx);
+        $.ajax({
+            type:'get',
+            url:'http://localhost:3108/dindanshangchu',
+            data:{
+                        'id':idx,
+                        
+                    },
+            async:true,
+            success:function(str){
+                        console.log(str);
+                    }
+
+        })
       });
     } else if(obj.event === 'edit'){
       layer.prompt({
         formType: 2
-        ,value: data.email
+        ,value: data.mane
       }, function(value, index){
         obj.update({
-          email: value
+          mane: value
         });
         layer.close(index);
+        $.ajax({
+                    type:'get',
+                    url:'http://localhost:3108/dindanbianji',
+                    async:true,
+                    data:{
+                        'id':obj.data.id,
+                        'name':value,
+                        'time':edit_time
+                    },
+                    success:function(str){
+                        console.log(str);
+                    }
+                });
       });
     }
   });

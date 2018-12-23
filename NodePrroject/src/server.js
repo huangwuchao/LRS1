@@ -164,7 +164,7 @@ app.get('/dindan',function(req,res){
         });
         // user.find({},{_id:0,class:1}).limit(12).toArray(function(err,result){
         //     res.send({
-        //         code:0,
+        //         code:0,  
         //         data:result,
         //         msg:'商品列表',
         //         count:sum
@@ -213,6 +213,36 @@ app.get('/shangchu',function(req,res){
         if(err) throw err;
         let db = database.db('h1809');
         let user = db.collection('xiangmu');
+       user.deleteOne({id:idx},(err,result)=>{
+            console.log(result)
+       })
+
+    });
+});
+//点击删除商品分类数据
+app.get('/fenleishangchu',function(req,res){
+    console.log(req.query);
+    let idx = req.query.id*1;
+    console.log(idx);
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('shangpin');
+       user.deleteOne({id:idx},(err,result)=>{
+            console.log(result)
+       })
+
+    });
+});
+//点击删除订单
+app.get('/dindanshangchu',function(req,res){
+    console.log(req.query);
+    let idx = req.query.id*1;
+    console.log(idx);
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('dindan');
        user.deleteOne({id:idx},(err,result)=>{
             console.log(result)
        })
@@ -274,7 +304,42 @@ app.get('/bianji',function(req,res){
 
     });
 });
+//分类点击编辑，改变商品分类的名字
+app.get('/fenleibianji',function(req,res){
+    let edit_id = req.query.id*1;
+    let edit_name = req.query.name;
+    let edit_time = req.query.time;
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('shangpin');
+        console.log(edit_id,edit_name,edit_time);
+        user.update({
+            id:edit_id
+        },{$set:{name:edit_name,joinTime:edit_time}},(err,result)=>{
+            // console.log(result);
+        })
 
+    });
+});
+//订单点击编辑
+app.get('/dindanbianji',function(req,res){
+    let edit_id = req.query.id*1;
+    let edit_name = req.query.name;
+    let edit_time = req.query.time;
+    MongoClient.connect('mongodb://localhost:27017',function(err,database){
+        if(err) throw err;
+        let db = database.db('h1809');
+        let user = db.collection('dindan');
+        //console.log(edit_id,edit_name,edit_time);
+        user.update({
+            id:edit_id
+        },{$set:{mane:edit_name,joinTime:edit_time}},(err,result)=>{
+            // console.log(result);
+        })
+
+    });
+});
 //点击上下架，改变数据库商品的状态
 app.get('/_change',function(req,res){
     let change_id = req.query.id*1;

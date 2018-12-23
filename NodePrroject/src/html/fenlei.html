@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="../assets/layui-v2.4.5/layui/css/layui.css">
   <script type="text/javascript" src="../assets/layui-v2.4.5/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../assets/jquery-3.2.1.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -83,7 +84,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑商品分类</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
               
@@ -110,11 +111,11 @@ layui.use('table', function(){
       // ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
       // ,{field:'city', title:'城市', width:100}
       // ,{field:'sign', title:'签名'}
-      ,{field:'joinTime', title:'添加时间', width:540, sort: true}
+      ,{field:'joinTime', title:'添加时间', width:444, sort: true}
       // ,{field:'ip', title:'IP', width:120}
       // ,{field:'logins', title:'登入次数', width:100, sort: true}
       // ,{field:'joinTime', title:'加入时间', width:120}
-      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:242}
     ]]
     ,page: true
   });
@@ -136,7 +137,7 @@ layui.use('table', function(){
       break;
     };
   });
-  
+  let edit_time = new Date().toLocaleDateString();
   //监听行工具事件
   table.on('tool(test)', function(obj){
     var data = obj.data;
@@ -145,6 +146,22 @@ layui.use('table', function(){
       layer.confirm('真的删除行么', function(index){
         obj.del();
         layer.close(index);
+        let idx= obj.data.id;
+        //console.log(idx);
+        $.ajax({
+            type:'get',
+            url:'http://localhost:3108/fenleishangchu',
+            data:{
+                        'id':idx,
+                        
+                    },
+            async:true,
+            success:function(str){
+                        console.log(str);
+                    }
+
+        })
+
       });
     } else if(obj.event === 'edit'){
       layer.prompt({
@@ -155,9 +172,30 @@ layui.use('table', function(){
           name: value
         });
         layer.close(index);
+        //console.log(obj.data.id)
+        $.ajax({
+                    type:'get',
+                    url:'http://localhost:3108/fenleibianji',
+                    async:true,
+                    data:{
+                        'id':obj.data.id,
+                        'name':value,
+                        'time':edit_time
+                    },
+                    success:function(str){
+                        console.log(str);
+                    }
+                });
+
       });
     }
+  
   });
+
+
+
+
+
 });
 </script>
 
