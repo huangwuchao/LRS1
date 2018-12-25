@@ -98,7 +98,7 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://localhost:3108/shangpinfenlei'
+    ,url:'http://39.108.255.1:3108/shangpinfenlei'
     ,toolbar: '#toolbarDemo'
     ,title: '用户数据表'
     ,cols: [[
@@ -150,7 +150,7 @@ layui.use('table', function(){
         //console.log(idx);
         $.ajax({
             type:'get',
-            url:'http://localhost:3108/fenleishangchu',
+            url:'http://39.108.255.1:3108/fenleishangchu',
             data:{
                         'id':idx,
                         
@@ -175,7 +175,7 @@ layui.use('table', function(){
         //console.log(obj.data.id)
         $.ajax({
                     type:'get',
-                    url:'http://localhost:3108/fenleibianji',
+                    url:'http://39.108.255.1:3108/fenleibianji',
                     async:true,
                     data:{
                         'id':obj.data.id,

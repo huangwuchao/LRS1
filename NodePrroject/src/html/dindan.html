@@ -97,7 +97,7 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://localhost:3108/dindan'
+    ,url:'http://39.108.255.1:3108/dindan'
     ,toolbar: '#toolbarDemo'
     ,title: '用户数据表'
     ,cols: [[
@@ -149,7 +149,7 @@ layui.use('table', function(){
         //console.log(idx);
         $.ajax({
             type:'get',
-            url:'http://localhost:3108/dindanshangchu',
+            url:'http://39.108.255.1:3108/dindanshangchu',
             data:{
                         'id':idx,
                         
@@ -172,7 +172,7 @@ layui.use('table', function(){
         layer.close(index);
         $.ajax({
                     type:'get',
-                    url:'http://localhost:3108/dindanbianji',
+                    url:'http://39.108.255.1:3108/dindanbianji',
                     async:true,
                     data:{
                         'id':obj.data.id,
